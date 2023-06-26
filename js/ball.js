@@ -3,8 +3,8 @@ class Ball{
         this.gameScreen = gameScreen;
         this.left = 230;
         this.top = 540;
-        this.width = 40;
-        this.height = 40;
+        this.width = 24;
+        this.height = 24;
 
         this.directionX = 1;
         this.directionY = 1;
@@ -12,7 +12,7 @@ class Ball{
         this.element = document.createElement("img");
         this.element.src = "./images/ball.png";
         this.element.style.position = "absolute";
-        this.element.style.borderRadius = 20;
+        this.element.style.borderRadius = 12;
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
         this.element.style.left = `${this.left}px`;
