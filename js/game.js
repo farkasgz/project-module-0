@@ -15,6 +15,7 @@ class Game {
             20,
             "./images/player.jpg"
         );
+        this.ball = new Ball(this.gameScreen);
 
         this.bricks = [];
 
@@ -29,7 +30,6 @@ class Game {
         this.gameScreen.style.height = `${this.height}px`;
         this.gameScreen.style.width = `${this.width}px`;
         this.gameScreen.style.display = 'block';
-        console.log("game started");
         this.gameloop();
     }
 
@@ -43,10 +43,12 @@ class Game {
 
     update() {
         this.player.move();
+        this.ball.move();
     }
 
     endGame() {
         this.player.element.remove();
+        this.ball.element.remove();
         this.bricks.forEach((brick) => brick.element.remove());
 
         this.gameIsOver = true;
