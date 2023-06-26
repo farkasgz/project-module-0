@@ -7,7 +7,14 @@ class Game {
         this.height = 600;
         this.width = 500;
 
-        this.player = new Player;
+        this.player = new Player(
+            this.gameScreen,
+            200,
+            575,
+            100,
+            20,
+            "./images/player.jpg"
+        );
 
         this.bricks = [];
 
@@ -27,7 +34,7 @@ class Game {
     }
 
     gameloop() {
-        if (this.gameIsOver){
+        if (this.lives === 0){
             this.endGame();
         }
         this.update();
@@ -39,6 +46,11 @@ class Game {
     }
 
     endGame() {
-        
+        this.player.element.remove();
+        this.bricks.forEach((brick) => brick.element.remove());
+
+        this.gameIsOver = true;
+        this.gameScreen.style.display = 'none';
+        this.scoreScreen.style.display = 'block';
     }
 }

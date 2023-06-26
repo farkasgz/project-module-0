@@ -7,8 +7,50 @@ window.onload = function () {
         startGame();
     })
 
+    menuButton.addEventListener("click", function() {
+        backToMenu();
+    })
+
     function startGame() {
         game = new Game;
         game.start();
+    }
+
+    function backToMenu() {
+        location.reload();
+    }
+
+    window.addEventListener("keydown", inputPress);
+    window.addEventListener("keyup", inputRelease);
+
+    function inputPress (event) {
+        const key = event.key;
+        const possibleKeystrokes = [
+            "ArrowLeft",
+            "ArrowRight",
+        ];
+
+        if (possibleKeystrokes.includes(key)) {
+            switch (key) {
+                case "ArrowLeft": 
+                    game.player.directionX = -2;
+                    break;
+                case "ArrowRight":
+                    game.player.directionX = 2;
+                    break;
+            }
+        }
+    }
+
+    function inputRelease (event) {
+        const key = event.key;
+        const possibleKeystrokes = [
+            "ArrowLeft",
+            "ArrowRight",
+        ];
+
+        if (possibleKeystrokes.includes(key)) {
+            game.player.directionX = 0;
+        }
     }
 }
