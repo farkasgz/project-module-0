@@ -17,4 +17,8 @@ class Brick {
         this.gameScreen.appendChild(this.element);
     }
 
+    updatePosition() {
+        this.element.style.left = `${this.left}px`;
+        this.element.style.top = `${this.top}px`;
+      }
 }

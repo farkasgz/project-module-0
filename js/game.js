@@ -45,7 +45,12 @@ class Game {
         this.player.move();
         this.ball.move();
 
-        if (this.bricks.length < 1){
+        if (this.bricks.length <= 20){
+            this.bricks.forEach((elem) => {
+                elem.top += 35;
+                elem.updatePosition();
+            });
+
             const brickImg = [
                 "images/blueBrick.png",
                 "images/grayBrick.png",
@@ -66,14 +71,14 @@ class Game {
             this.ball = new Ball(this.gameScreen);
         };
 
-        if (this.ball.hitPlayer(this.player)){
+        if (this.ball.hitObject(this.player)){
             this.ball.directionX = ((this.ball.left + this.ball.width/2) - (this.player.left + this.player.width/2)) / (this.player.width/2);
             this.ball.directionY = 0 - (2-Math.abs(this.ball.directionX));
         }
         
         for(let i = 0; i < this.bricks.length; i++){
             const brick = this.bricks[i];
-            if (this.ball.hitBrick(brick)){
+            if (this.ball.hitObject(brick)){
                 brick.element.remove();
                 this.bricks.splice(i, 1);
                 this.score ++;

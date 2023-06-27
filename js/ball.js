@@ -51,31 +51,15 @@ class Ball{
         this.element.style.top = `${this.top}px`;
     }
 
-    hitPlayer(player) {
-        const playerRect = player.element.getBoundingClientRect();
+    hitObject(object) {
+        const objectRect = object.element.getBoundingClientRect();
         const ballRect = this.element.getBoundingClientRect();
 
         if(
-            playerRect.left < ballRect.right &&
-            playerRect.right > ballRect.left &&
-            playerRect.top < ballRect.bottom &&
-            playerRect.bottom > ballRect.top
-        ){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    hitBrick(brick) {
-        const brickRect = brick.element.getBoundingClientRect();
-        const ballRect = this.element.getBoundingClientRect();
-
-        if(
-            brickRect.left < ballRect.right &&
-            brickRect.right > ballRect.left &&
-            brickRect.top < ballRect.bottom &&
-            brickRect.bottom > ballRect.top
+            objectRect.left < ballRect.right &&
+            objectRect.right > ballRect.left &&
+            objectRect.top < ballRect.bottom &&
+            objectRect.bottom > ballRect.top
         ){
             return true;
         } else {
