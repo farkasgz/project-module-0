@@ -6,8 +6,8 @@ class Ball{
         this.width = 24;
         this.height = 24;
 
-        this.directionX = 1;
-        this.directionY = 1;
+        this.directionX = 0;
+        this.directionY = -2;
 
         this.element = document.createElement("img");
         this.element.src = "./images/ball.png";

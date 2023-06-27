@@ -60,8 +60,10 @@ class Game {
             }
         }
 
-        if (this.ball.top > this.player.top) {
+        if (this.ball.top > this.player.top + this.player.height) {
             this.lives--;
+            this.ball.element.remove();
+            this.ball = new Ball(this.gameScreen);
         };
 
         if (this.ball.hitPlayer(this.player)){
@@ -76,7 +78,7 @@ class Game {
                 this.bricks.splice(i, 1);
                 this.score ++;
                 i--;
-                this.ball.directionY *= (-1);
+                this.ball.directionY = 0 + (2-Math.abs(this.ball.directionX));
             }
         }
 
