@@ -21,8 +21,6 @@ class Game {
 
         this.score = 0;
         this.lives = 3;
-
-        //this.gameIsOver = false;
     }
 
     start() {
@@ -67,7 +65,8 @@ class Game {
         };
 
         if (this.ball.hitPlayer(this.player)){
-            this.ball.directionY *= (-1);
+            this.ball.directionX = ((this.ball.left + this.ball.width/2) - (this.player.left + this.player.width/2)) / (this.player.width/2);
+            this.ball.directionY = 0 - (2-Math.abs(this.ball.directionX));
         }
         
         for(let i = 0; i < this.bricks.length; i++){
@@ -90,7 +89,6 @@ class Game {
         this.ball.element.remove();
         this.bricks.forEach((brick) => brick.element.remove());
 
-        //this.gameIsOver = true;
         this.gameScreen.style.display = 'none';
         this.scoreScreen.style.display = 'block';
     }

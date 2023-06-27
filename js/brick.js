@@ -7,6 +7,7 @@ class Brick {
         this.height = 25;
 
         this.element = document.createElement("img");
+        this.element.classList.add("brick")
         this.element.src = imgSrc;
         this.element.style.position = "absolute";
         this.element.style.width = `${this.width}px`;
