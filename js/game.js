@@ -22,7 +22,7 @@ class Game {
         this.score = 0;
         this.lives = 3;
 
-        this.gameIsOver = false;
+        //this.gameIsOver = false;
     }
 
     start() {
@@ -34,8 +34,10 @@ class Game {
     }
 
     gameloop() {
+
         if (this.lives === 0){
             this.endGame();
+            return;
         }
         this.update();
         window.requestAnimationFrame(() => this.gameloop());
@@ -45,9 +47,42 @@ class Game {
         this.player.move();
         this.ball.move();
 
+        if (this.bricks.length < 1){
+            const brickImg = [
+                "images/blueBrick.png",
+                "images/grayBrick.png",
+                "images/greenBrick.png",
+                "images/pinkBrick.png",
+                "images/tealBrick.png",
+                "images/yellowBrick.png"
+            ];
+
+            for (let i=0; i<8; i++) {
+                this.bricks.push(new Brick(this.gameScreen, 15+i*60, brickImg[Math.floor(Math.random()*6)]));
+            }
+        }
+
+        if (this.ball.top > this.player.top) {
+            this.lives--;
+        };
+
         if (this.ball.hitPlayer(this.player)){
             this.ball.directionY *= (-1);
         }
+        
+        for(let i = 0; i < this.bricks.length; i++){
+            const brick = this.bricks[i];
+            if (this.ball.hitBrick(brick)){
+                brick.element.remove();
+                this.bricks.splice(i, 1);
+                this.score ++;
+                i--;
+                this.ball.directionY *= (-1);
+            }
+        }
+
+        document.getElementById("score").innerText  = `${this.score}`;
+        document.getElementById("lives").innerText  = `${this.lives}`;
     }
 
     endGame() {
@@ -55,7 +90,7 @@ class Game {
         this.ball.element.remove();
         this.bricks.forEach((brick) => brick.element.remove());
 
-        this.gameIsOver = true;
+        //this.gameIsOver = true;
         this.gameScreen.style.display = 'none';
         this.scoreScreen.style.display = 'block';
     }
