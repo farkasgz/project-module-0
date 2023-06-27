@@ -33,10 +33,10 @@ window.onload = function () {
         if (possibleKeystrokes.includes(key)) {
             switch (key) {
                 case "ArrowLeft": 
-                    game.player.directionX = -2;
+                    game.player.directionX = (-0.67)*game.speed;
                     break;
                 case "ArrowRight":
-                    game.player.directionX = 2;
+                    game.player.directionX = (0.67)*game.speed;
                     break;
             }
         }

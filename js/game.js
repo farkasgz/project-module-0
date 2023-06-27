@@ -21,6 +21,7 @@ class Game {
 
         this.score = 0;
         this.lives = 3;
+        this.speed = 2;
     }
 
     start() {
@@ -29,6 +30,7 @@ class Game {
         this.gameScreen.style.width = `${this.width}px`;
         this.gameScreen.style.display = 'block';
         this.gameloop();
+        const intervalId = setInterval(() => this.speed++,5000)
     }
 
     gameloop() {
@@ -69,11 +71,12 @@ class Game {
             this.lives--;
             this.ball.element.remove();
             this.ball = new Ball(this.gameScreen);
+            this.speed = 2;
         };
 
         if (this.ball.hitObject(this.player)){
-            this.ball.directionX = ((this.ball.left + this.ball.width/2) - (this.player.left + this.player.width/2)) / (this.player.width/2);
-            this.ball.directionY = 0 - (2-Math.abs(this.ball.directionX));
+            this.ball.directionX = (((this.ball.left + this.ball.width/2) - (this.player.left + this.player.width/2)) / (this.player.width/2)) * (this.speed/2);
+            this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
         }
         
         for(let i = 0; i < this.bricks.length; i++){
@@ -83,7 +86,7 @@ class Game {
                 this.bricks.splice(i, 1);
                 this.score ++;
                 i--;
-                this.ball.directionY = 0 + (2-Math.abs(this.ball.directionX));
+                this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
             }
         }
 
