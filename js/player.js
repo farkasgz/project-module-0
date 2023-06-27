@@ -33,20 +33,4 @@ class Player {
     updatePosition() {
         this.element.style.left = `${this.left}px`;
     }
-
-    hitBall(ball) {
-        const playerRect = this.element.getBoundingClientRect();
-        const ballRect = ball.element.getBoundingClientRect();
-
-        if(
-            playerRect.left < ballRect.right &&
-            playerRect.right > ballRect.left &&
-            playerRect.top < ballRect.bottom &&
-            playerRect.bottom > ballRect.top
-        ){
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

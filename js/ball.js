@@ -50,4 +50,20 @@ class Ball{
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
     }
+
+    hitPlayer(player) {
+        const playerRect = player.element.getBoundingClientRect();
+        const ballRect = this.element.getBoundingClientRect();
+
+        if(
+            playerRect.left < ballRect.right &&
+            playerRect.right > ballRect.left &&
+            playerRect.top < ballRect.bottom &&
+            playerRect.bottom > ballRect.top
+        ){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

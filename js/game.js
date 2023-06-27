@@ -45,7 +45,7 @@ class Game {
         this.player.move();
         this.ball.move();
 
-        if (this.player.hitBall(this.ball)){
+        if (this.ball.hitPlayer(this.player)){
             this.ball.directionY *= (-1);
         }
     }
