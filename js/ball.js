@@ -54,6 +54,10 @@ class Ball{
     hitObject(object) {
         const objectRect = object.element.getBoundingClientRect();
         const ballRect = this.element.getBoundingClientRect();
+        const ballX = ballRect.left + ballRect.width/2;
+        const ballY = ballRect.top + ballRect.height/2;
+        const objectX = objectRect.left + objectRect.width/2;
+        const objectY = objectRect.top + objectRect.height/2;
 
         if(
             objectRect.left < ballRect.right &&
@@ -61,7 +65,11 @@ class Ball{
             objectRect.top < ballRect.bottom &&
             objectRect.bottom > ballRect.top
         ){
-            return true;
+            if(Math.abs(ballX - objectX) - objectRect.width/2 > Math.abs(ballY - objectY) - objectRect.height/2) {
+                return "side";
+            } else {
+                return "topOrBottom"
+            }
         } else {
             return false;
         }

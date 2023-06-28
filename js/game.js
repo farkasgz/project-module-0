@@ -81,12 +81,18 @@ class Game {
         
         for(let i = 0; i < this.bricks.length; i++){
             const brick = this.bricks[i];
-            if (this.ball.hitObject(brick)){
+            const hit = this.ball.hitObject(brick);
+            if (hit){
                 brick.element.remove();
                 this.bricks.splice(i, 1);
                 this.score ++;
                 i--;
-                this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
+                if (hit === "side"){
+                    this.ball.directionX *= (-1);
+                }
+                if (hit === "topOrBottom"){
+                    this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
+                }
             }
         }
 
