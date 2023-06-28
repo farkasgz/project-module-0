@@ -21,7 +21,7 @@ class Game {
 
         this.score = 0;
         this.lives = 3;
-        this.speed = 2;
+        this.speed = 3;
     }
 
     start() {
@@ -32,9 +32,9 @@ class Game {
         let intervalId;
         window.addEventListener("keydown", (event) => {
             if(event.key === " "){
-                this.intervalId = setInterval(() => this.speed++,5000);
+                this.intervalId = setInterval(() => this.speed++,10000);
                 if(this.ball.directionY === 0){
-                    this.ball.directionX = -1 + Math.random()*2;
+                    this.ball.directionX = -1.5 + Math.random()*3;
                     this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
                 }
             }
@@ -76,11 +76,11 @@ class Game {
             }
         }
 
-        if (this.ball.top > this.player.top + this.player.height) {
+        if (this.ball.top > this.player.top + this.player.height + 10) {
             this.lives--;
             this.ball.element.remove();
             clearInterval(this.intervalId);
-            this.speed = 2;
+            this.speed = 3;
             this.ball = new Ball(this.gameScreen);
         };
 
