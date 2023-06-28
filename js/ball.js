@@ -7,7 +7,7 @@ class Ball{
         this.height = 24;
 
         this.directionX = 0;
-        this.directionY = -2;
+        this.directionY = 0;
 
         this.element = document.createElement("img");
         this.element.src = "./images/ball.png";
@@ -67,8 +67,10 @@ class Ball{
         ){
             if(Math.abs(ballX - objectX) - objectRect.width/2 > Math.abs(ballY - objectY) - objectRect.height/2) {
                 return "side";
+            } else if(ballY > objectY){
+                return "bottom";
             } else {
-                return "topOrBottom"
+                return "top"
             }
         } else {
             return false;

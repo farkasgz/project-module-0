@@ -15,9 +15,9 @@ class Game {
             20,
             "./images/player.jpg"
         );
-        this.ball = new Ball(this.gameScreen);
 
         this.bricks = [];
+        this.ball = new Ball(this.gameScreen);
 
         this.score = 0;
         this.lives = 3;
@@ -29,8 +29,17 @@ class Game {
         this.gameScreen.style.height = `${this.height}px`;
         this.gameScreen.style.width = `${this.width}px`;
         this.gameScreen.style.display = 'block';
+        let intervalId;
+        window.addEventListener("keydown", (event) => {
+            if(event.key === " "){
+                this.intervalId = setInterval(() => this.speed++,5000);
+                if(this.ball.directionY === 0){
+                    this.ball.directionX = -1 + Math.random()*2;
+                    this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
+                }
+            }
+        });
         this.gameloop();
-        const intervalId = setInterval(() => this.speed++,5000)
     }
 
     gameloop() {
@@ -70,8 +79,9 @@ class Game {
         if (this.ball.top > this.player.top + this.player.height) {
             this.lives--;
             this.ball.element.remove();
-            this.ball = new Ball(this.gameScreen);
+            clearInterval(this.intervalId);
             this.speed = 2;
+            this.ball = new Ball(this.gameScreen);
         };
 
         if (this.ball.hitObject(this.player)){
@@ -90,8 +100,11 @@ class Game {
                 if (hit === "side"){
                     this.ball.directionX *= (-1);
                 }
-                if (hit === "topOrBottom"){
+                if (hit === "bottom"){
                     this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
+                }
+                if (hit === "top"){
+                    this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
                 }
             }
         }
