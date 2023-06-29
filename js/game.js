@@ -103,8 +103,11 @@ class Game {
                 this.score ++;
                 i--;
                 switch (hit) {
-                    case "side":
-                        this.ball.directionX *= (-1);
+                    case "right":
+                        this.ball.directionX = 0 + Math.abs(this.ball.directionX);
+                        break;
+                    case "left":
+                        this.ball.directionX = 0 - Math.abs(this.ball.directionX);
                         break;
                     case "bottom": 
                         this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));

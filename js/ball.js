@@ -66,7 +66,12 @@ class Ball{
             objectRect.bottom > ballRect.top
         ){
             if(Math.abs(ballX - objectX) - objectRect.width/2 > Math.abs(ballY - objectY) - objectRect.height/2) {
-                return "side";
+                if(ballX - objectX > 0){
+                    return "right";
+                }
+                if(ballX - objectX < 0){
+                    return "left";
+                }
             } else if(ballY > objectY){
                 return "bottom";
             } else {
