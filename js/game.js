@@ -42,7 +42,7 @@ class Game {
                     this.ball.directionY *= Math.sqrt(this.speed / (this.speed-1));
                 },10000);
                 if(this.ball.directionY === 0){
-                    this.ball.directionX = -1.5 + Math.random()*3;
+                    this.ball.directionX = (this.speed/2)*(-1) + Math.random()*(this.speed);
                     this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
                 }
             }

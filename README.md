@@ -15,7 +15,6 @@ BrickBreaker is a fun, lighthearted browser game, where the goal is to destroy a
 - The game ends when player has no lives left.
 
 ## Backlog Functionalities
-- Improving bouncing logic
 - Tracking scores locally
 - Adding a leaderboard
 
