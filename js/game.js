@@ -17,6 +17,7 @@ class Game {
         );
 
         this.bricks = [];
+        this.hearts = [];
         this.ball = new Ball(this.gameScreen);
 
         this.score = 0;
@@ -28,7 +29,10 @@ class Game {
         this.startScreen.style.display = 'none';
         this.gameScreen.style.height = `${this.height}px`;
         this.gameScreen.style.width = `${this.width}px`;
-        this.gameScreen.style.display = 'block';
+        this.gameScreen.style.display = 'flex';
+        for(let i = 0; i < this.lives; i++){
+            this.hearts.push(new Heart);
+        }
         let intervalId;
         window.addEventListener("keydown", (event) => {
             if(event.key === " "){
@@ -79,6 +83,7 @@ class Game {
         if (this.ball.top > this.player.top + this.player.height + 10) {
             this.lives--;
             this.ball.element.remove();
+            this.hearts[this.lives].element.remove();
             clearInterval(this.intervalId);
             this.speed = 3;
             this.ball = new Ball(this.gameScreen);
@@ -97,20 +102,22 @@ class Game {
                 this.bricks.splice(i, 1);
                 this.score ++;
                 i--;
-                if (hit === "side"){
-                    this.ball.directionX *= (-1);
-                }
-                if (hit === "bottom"){
-                    this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
-                }
-                if (hit === "top"){
-                    this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
+                switch (hit) {
+                    case "side":
+                        this.ball.directionX *= (-1);
+                        break;
+                    case "bottom": 
+                        this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
+                        break;
+                    case "top":
+                        this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
+                        break;
                 }
             }
         }
 
         document.getElementById("score").innerText  = `${this.score}`;
-        document.getElementById("lives").innerText  = `${this.lives}`;
+        //document.getElementById("lives").innerText  = `${this.lives}`;
     }
 
     endGame() {
