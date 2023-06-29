@@ -117,13 +117,22 @@ class Game {
         }
 
         document.getElementById("score").innerText  = `${this.score}`;
-        //document.getElementById("lives").innerText  = `${this.lives}`;
     }
 
     endGame() {
         this.player.element.remove();
         this.ball.element.remove();
         this.bricks.forEach((brick) => brick.element.remove());
+        document.getElementById("endscore").innerText  = `${this.score}`;
+        let judgement = "";
+        if(this.score <= 50) {
+            judgement = "You are a FAILURE";
+        } else if(this.score < 150) {
+            judgement = "Keep practicing";
+        } else {
+            judgement = "You are a literal GODGAMER";
+        }
+        document.getElementById("judgement").innerText = judgement;
 
         this.gameScreen.style.display = 'none';
         this.scoreScreen.style.display = 'block';

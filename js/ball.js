@@ -1,7 +1,7 @@
 class Ball{
     constructor(gameScreen){
         this.gameScreen = gameScreen;
-        this.left = 230;
+        this.left = 235;
         this.top = 540;
         this.width = 24;
         this.height = 24;
