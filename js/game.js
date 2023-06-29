@@ -36,7 +36,11 @@ class Game {
         let intervalId;
         window.addEventListener("keydown", (event) => {
             if(event.key === " "){
-                this.intervalId = setInterval(() => this.speed++,10000);
+                this.intervalId = setInterval(() => {
+                    this.speed++;
+                    this.ball.directionX *= Math.sqrt(this.speed / (this.speed-1));
+                    this.ball.directionY *= Math.sqrt(this.speed / (this.speed-1));
+                },10000);
                 if(this.ball.directionY === 0){
                     this.ball.directionX = -1.5 + Math.random()*3;
                     this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
@@ -110,10 +114,10 @@ class Game {
                         this.ball.directionX = 0 - Math.abs(this.ball.directionX);
                         break;
                     case "bottom": 
-                        this.ball.directionY = 0 + (this.speed-Math.abs(this.ball.directionX));
+                        this.ball.directionY = 0 + (Math.abs(this.ball.directionY));
                         break;
                     case "top":
-                        this.ball.directionY = 0 - (this.speed-Math.abs(this.ball.directionX));
+                        this.ball.directionY = 0 - (Math.abs(this.ball.directionY));
                         break;
                 }
             }
