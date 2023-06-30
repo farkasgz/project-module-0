@@ -38,8 +38,8 @@ class Game {
             if(event.key === " "){
                 this.intervalId = setInterval(() => {
                     this.speed++;
-                    this.ball.directionX *= Math.sqrt(this.speed / (this.speed-1));
-                    this.ball.directionY *= Math.sqrt(this.speed / (this.speed-1));
+                    this.ball.directionX *= this.speed / (this.speed-1);
+                    this.ball.directionY *= this.speed / (this.speed-1);
                 },10000);
                 if(this.ball.directionY === 0){
                     this.ball.directionX = (this.speed/2)*(-1) + Math.random()*(this.speed);
@@ -63,6 +63,7 @@ class Game {
     update() {
         this.player.move();
         this.ball.move();
+        console.log(Math.abs(this.ball.directionX)+Math.abs(this.ball.directionY));
 
         if (this.bricks.length <= 20){
             this.bricks.forEach((elem) => {
